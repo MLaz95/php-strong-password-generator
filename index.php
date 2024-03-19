@@ -30,9 +30,6 @@ function generatePassWord($length)
 
     return $random_string;
 }
-
-
-var_dump(generatePassWord(15));
 ?>
 
 
@@ -49,11 +46,23 @@ var_dump(generatePassWord(15));
 
 <body data-bs-theme="dark">
 
-    <form action="">
-        <label for="pw-length">How long should your password be?</label>
-        <input type="number" name="pw-length" id="pw-length">
+    <div class="container vh-100 d-flex flex-column align-items-center justify-content-center">
+        <form action="">
+            <label for="pw-length">How long should your password be?</label>
+            <input type="number" name="pw-length" id="pw-length">
+            <button type="submit" class="btn btn-outline-light">Confirm</button>
+        </form>
+    
+        <div>
+            Your new password is: 
+            <?php
+                if(isset($_GET['pw-length'])){
+                    echo generatePassWord($_GET['pw-length']);
+                }
+            ?>
+        </div>
+    </div>
 
-    </form>
 
     <!-- bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
