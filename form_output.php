@@ -3,7 +3,7 @@ session_start();
 require "./partials/head.php";
 ?>
 
-<div class="container d-flex flex-column vh-100 justify-content-center align-items-center">
+<div class="container d-flex flex-column vh-100 vw-100 justify-content-center align-items-center text-break">
     <h1 class="text-center">
         Your password is: <br>
         <?php

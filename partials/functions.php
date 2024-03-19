@@ -23,6 +23,28 @@ function generatePassWord($length, $letters = null, $numbers = null, $symbols = 
     if(isset($symbols)){
         array_push($valid_parameters, 'symbols');
     }
+
+    // if characters can't be repeated then the maximum lenght of the password is set equal to the maximum number of available characters
+    if(isset($norepeat)){
+       
+        $max_length = 0;
+
+        if(isset($letters)){
+            $max_length += $seed_letters_length;
+        }
+
+        if(isset($numbers)){
+            $max_length += 10;
+        }
+
+        if(isset($symbols)){
+            $max_length += $seed_symbols_length;
+        }
+
+        if($length > $max_length){
+            $length = $max_length;
+        }
+    }
     
     // i tied to pw length chosen by user
     $i = 0;
