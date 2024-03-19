@@ -4,7 +4,7 @@ session_start();
 require "./partials/functions.php";
 
 if(isset($_GET['pw-length'])){
-    $_SESSION["userpw"] = generatePassWord($_GET['pw-length'], $_GET['letters'], $_GET['numbers'], $_GET['symbols']);
+    $_SESSION["userpw"] = generatePassWord($_GET['pw-length'], $_GET['letters'], $_GET['numbers'], $_GET['symbols'], $_GET['norepeat']);
     header('Location: ./form_output.php');
 }
 
@@ -33,6 +33,10 @@ require "./partials/head.php";
                 <div>
                     <label for="symbols">Symbols</label>
                     <input type="checkbox" name="symbols" id="symbols">                    
+                </div>
+                <div>
+                    <label for="norepeat">No Repeats</label>
+                    <input type="checkbox" name="norepeat" id="norepeat">                    
                 </div>
             </div>
         </form>

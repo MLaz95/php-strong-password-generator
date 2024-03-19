@@ -1,6 +1,6 @@
 <?php
 
-function generatePassWord($length, $letters = null, $numbers = null, $symbols = null,)
+function generatePassWord($length, $letters = null, $numbers = null, $symbols = null, $norepeat = null)
 {
     // possible letters and symbols that can end up in the pw, we don't need a variable for numbers because of random_int
     $seed_letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -25,21 +25,60 @@ function generatePassWord($length, $letters = null, $numbers = null, $symbols = 
     }
     
     // i tied to pw length chosen by user
-    for ($i = 0; $i < $length; $i++) {
+    $i = 0;
+    while ($i < $length) {
         
         // randomly picks between letter, symbol, number for each character
         switch ($valid_parameters[random_int(0, count($valid_parameters) - 1)]) {
             case 'letters':
                 $random_letter = $seed_letters[random_int(0, $seed_letters_length - 1)];
-                $random_string .= $random_letter;
-                break;
+
+                if(isset($norepeat)){
+                    if(!str_contains($random_string, $random_letter)){
+                        $random_string .= $random_letter;
+                        $i++;
+                        break;
+                    }else{
+                        break;
+                    }
+                }else{
+                    $random_string .= $random_letter;
+                    $i++;
+                    break;
+                }
+                
             case 'symbols':
                 $random_symbol = $seed_symbols[random_int(0, $seed_symbols_length - 1)];
-                $random_string .= $random_symbol;
-                break;
+
+                if(isset($norepeat)){
+                    if(!str_contains($random_string, $random_symbol)){
+                        $random_string .= $random_symbol;
+                        $i++;
+                        break;
+                    }else{
+                        break;
+                    }
+                }else{
+                    $random_string .= $random_symbol;
+                    $i++;
+                    break;
+                }
+
             case 'numbers':
-                $random_string .= random_int(0, 9);
-                break;
+                $random_number = random_int(0, 9);
+                if(isset($norepeat)){
+                    if(!str_contains($random_string, $random_number)){
+                        $random_string .= $random_number;
+                        $i++;
+                        break;
+                    }else{
+                        break;
+                    }
+                }else{
+                    $random_string .= $random_number;
+                    $i++;
+                    break;
+                }
         }
     }
 
